@@ -18,7 +18,7 @@ class ImageUploadController extends Controller
     {
         $images = $request->file('file');
         foreach ($images as $index => $image) {
-            $path = $image->store('public/images', 'local'); // Adjust 'local' if needed
+            $path = $image->store('public/images', 'local');
             Image::create([
                 'path' => $path,
                 'order' => $index + 1,
