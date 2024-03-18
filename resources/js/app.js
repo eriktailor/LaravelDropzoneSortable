@@ -24,8 +24,8 @@ $.ajaxSetup({
 Dropzone.autoDiscover = false;
 
 // set global variables
-var errorMessage = $('#dzErrorMessage'),
-    placeHolder = $('#dzPlaceholder');
+const errorMessage = $('#dzErrorMessage');
+const placeHolder = $('#dzPlaceholder');
 
 /**
  * ------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ var errorMessage = $('#dzErrorMessage'),
 /**
  * Dropzone initial setup
  */
-var myDropzone = new Dropzone('#dzDropzone', {
+const myDropzone = new Dropzone('#dzDropzone', {
     url: '/upload',
     autoProcessQueue: false,
     uploadMultiple: true,
@@ -71,7 +71,7 @@ myDropzone.on('addedfile', function(file) {
         }
 
         // Adds the cover badge to first image
-        var coverBadge = $('#dzBadgeTemplate').html();
+        const coverBadge = $('#dzBadgeTemplate').html();
         if (previews.eq(0).find('.dz-cover-badge').length === 0) {
             previews.eq(0).find('.dz-image').append(coverBadge);
         }
@@ -136,11 +136,11 @@ $(document).on('click', '.dz-remove-button', function(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    var filePreview = $(this).closest('.dz-image-preview');
-    var fileId = filePreview.data('file-id');
+    const filePreview = $(this).closest('.dz-image-preview');
+    const fileId = filePreview.data('file-id');
 
     // find the corresponding Dropzone object
-    var fileToRemove = myDropzone.files.find(function(file) {
+    const fileToRemove = myDropzone.files.find(function(file) {
         return file.uniqueId === fileId;
     });
 
@@ -212,19 +212,19 @@ $(document).on('click', '.dz-remove-button', function(event) {
  * Sortable initial setup
  */
 $('#dzPreviews').sortable({
-    items: '.dz-preview',
-    cursor: 'move',
+    items: '.dz-image-preview',
+    cursor: 'grab',
     opacity: 0.5,
-    containment: '#image-upload',
+    containment: 'parent',
     distance: 20,
     tolerance: 'pointer',
     stop: function() {
         // Update the files array based on new order
-        var files = myDropzone.files;
-        var sortedFiles = [];
+        const files = myDropzone.files;
+        const sortedFiles = [];
         $('#image-upload .dz-preview .dz-filename [data-dz-name]').each(function() {
-            var name = $(this).text();
-            var file = files.find(file => file.name === name);
+            const name = $(this).text();
+            const file = files.find(file => file.name === name);
             if (file) {
                 sortedFiles.push(file);
             }
