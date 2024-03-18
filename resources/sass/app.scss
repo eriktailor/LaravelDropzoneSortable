@@ -1,5 +1,7 @@
 // Page styles ------------------------------------------------
 
+@import 'bootstrap/scss/bootstrap';
+
 body {
     background: #eaeeff;
 }
@@ -17,6 +19,7 @@ h1 {
 .main-drag-area {
     min-height: 350px;
     border: 1px dashed #8B8F93;
+    background: transparent;
 }
 
 .dz-image {
@@ -45,6 +48,8 @@ h1 {
     top: 0;
     left: 0;
     width: 100%;
+    background: #FFF;
+    border: 1px dashed #8B8F93;
 }
 
 .dz-previews-container {
