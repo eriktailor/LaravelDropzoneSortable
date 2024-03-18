@@ -1,0 +1,90 @@
+// Page styles ------------------------------------------------
+
+body {
+    background: #eaeeff;
+}
+
+h1 {
+    letter-spacing: -1px;
+}
+
+.container {
+    max-width: 650px;
+}
+
+// Dropzone styles ------------------------------------------------
+
+.main-drag-area {
+    min-height: 350px;
+    border: 1px dashed #8B8F93;
+}
+
+.dz-image {
+    height: 200px;
+}
+
+.dz-image-preview {
+    position: relative;
+}
+
+.dz-image-preview:first-child {
+    margin-top: 0 !important;
+}
+
+.dz-image-preview:first-child .dz-image {
+    height: 350px;
+}
+
+.dz-message {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.dz-previews-container {
+    transition: all 0.2s;
+    margin-top: 0 !important;
+}
+
+.dz-drag-hover {
+    background: #DEE2E6 !important;
+}
+
+.dz-drag-hover .dz-message {
+    color: #05050D !important;
+    display: flex !important;
+}
+
+.dz-drag-hover .dz-previews-container {
+    opacity: 0.1
+}
+
+.dz-additional-area {
+    height: 200px;
+    border: 1px dashed #8B8F93;
+}
+
+.dz-additional-area:hover {
+    border-style: solid !important;
+}
+
+.dz-remove-button {
+    background: rgba(0,0,0,0.5);
+    width: 24px;
+    height: 24px;
+    border-radius: 100px;
+    padding: 5px;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 0;
+    right: 0;
+    &:hover {
+        background: rgba(0,0,0,0.75)
+    }
+}
