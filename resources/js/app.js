@@ -218,17 +218,57 @@ $('#dzPreviews').sortable({
     containment: 'parent',
     distance: 20,
     tolerance: 'pointer',
+    update: function() {
+
+        // after sorting, adjust the layout and move the cover badge to the first item
+        $('#dzPreviews .dz-image-preview').each(function(index) {
+            if (index === 0) {
+
+                // ensure the first item is cover image
+                $(this).removeClass('col-md-6').addClass('col-12');
+
+                // adjust the height for the cover image
+                $(this).find('.dz-image').css('height', '350px'); 
+                
+                // move the cover badge to this item if it's not already here
+                if ($(this).find('.dz-cover-badge').length === 0) {
+
+                    // remove any existing cover badge first
+                    $('.dz-cover-badge').remove();
+
+                    // add the cover badge to this item
+                    const coverBadgeHtml = $('#dzBadgeTemplate').html();
+                    $(this).find('.dz-image').append(coverBadgeHtml);
+                    
+                }
+            } else {
+
+                // make following items additional items
+                $(this).removeClass('col-12').addClass('col-md-6');
+
+                // reset the height of additional items
+                $(this).find('.dz-image').css('height', '200px');
+            }
+        });
+    },
     stop: function() {
-        // Update the files array based on new order
+
+        // update the files array based on new order
         const files = myDropzone.files;
         const sortedFiles = [];
-        $('#image-upload .dz-preview .dz-filename [data-dz-name]').each(function() {
-            const name = $(this).text();
-            const file = files.find(file => file.name === name);
+
+        $('#dzPreviews .dz-image-preview').each(function() {
+
+            // find the file unique data-id
+            const fileId = $(this).data('id');
+            const file = myDropzone.files.find(file => file.tempId === fileId);
+
+            // if file found, push to order array
             if (file) {
                 sortedFiles.push(file);
             }
         });
+        
         myDropzone.files = sortedFiles;
     }
 });
@@ -246,11 +286,12 @@ $('#dzSubmitButton').on('click', function(event) {
     event.preventDefault();
 
     // show error messages if not have enough images
-    if (myDropzone.files.length < 1) {
+  /*   if (myDropzone.files.length === 0) {
         errorMessage.show().text('You have to upload at least 1 image.');
     } else {
 
         // process the queue
         myDropzone.processQueue();
-    }
+    } */
+    myDropzone.processQueue();
 });
