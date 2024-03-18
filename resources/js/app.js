@@ -40,8 +40,8 @@ var myDropzone = new Dropzone('#dzDropzone', {
     url: '/upload',
     autoProcessQueue: false,
     uploadMultiple: true,
-    parallelUploads: 11,
-    maxFiles: 11,
+    parallelUploads: 5,
+    maxFiles: 5,
     thumbnailWidth: 800,
     thumbnailHeight: 500,
     previewTemplate: $('#dzTemplate').html(),
@@ -111,7 +111,7 @@ function updateAdditionalAreas() {
     // remove all additional areas first
     $(myDropzone.previewsContainer).find('.dz-additional-area').parent().remove();
 
-    additionalAreas = 9 - filesCount;
+    additionalAreas = 5 - filesCount;
 
     for (let i = 0; i < additionalAreas; i++) {
         $(myDropzone.previewsContainer).append(additionalTemplate);
@@ -244,5 +244,13 @@ $('#dzPreviews').sortable({
  */
 $('#dzSubmitButton').on('click', function(event) {
     event.preventDefault();
-    myDropzone.processQueue();
+
+    // show error messages if not have enough images
+    if (myDropzone.files.length < 1) {
+        errorMessage.show().text('You have to upload at least 1 image.');
+    } else {
+
+        // process the queue
+        myDropzone.processQueue();
+    }
 });

@@ -13,7 +13,7 @@
         <!-- Page Header -->
         <header class="mb-5">
             <h1 class="display-5 fw-bold mb-4">Laravel Dropzone image upload with Sortable</h1>
-            <p class="lead text-muted mb-0">Upload minimum 5, and maximum 9 images of your choice. After uploading, you can change the order of the images by dragging.</p>
+            <p class="lead text-muted mb-0">Upload minimum 1, and maximum 5 images by dragging into the area below, then you can change their display order by dragging.</p>
         </header>
 
         <!-- Dropzone Form -->
