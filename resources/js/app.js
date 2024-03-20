@@ -164,46 +164,13 @@ $('#dzPreviews').sortable({
     distance: 20,
     tolerance: 'pointer',
     placeholder: 'sortable-placeholder',
-    update: function() {
-
-        // after sorting, adjust the layout and move the cover badge to the first item
-        $('#dzPreviews .dz-image').each(function(index) {
-            if (index === 0) {
-
-                // ensure the first item is cover image
-                $(this).removeClass('col-md-6').addClass('col-12');
-
-                // adjust the height for the cover image
-                $(this).find('.dz-image').css('height', '350px'); 
-                
-                // move the cover badge to this item if it's not already here
-                if ($(this).find('.dz-cover-badge').length === 0) {
-
-                    // remove any existing cover badge first
-                    $('.dz-cover-badge').remove();
-
-                    // add the cover badge to this item
-                    const coverBadgeHtml = $('#dzBadgeTemplate').html();
-                    $(this).find('.dz-image').append(coverBadgeHtml);
-                    
-                }
-            } else {
-
-                // make following items additional items
-                $(this).removeClass('col-12').addClass('col-md-6');
-
-                // reset the height of additional items
-                $(this).find('.dz-image').css('height', '200px');
-            }
-        });
-    },
     stop: function() {
 
         // update the files array based on new order
         const files = myDropzone.files;
         const sortedFiles = [];
 
-        $('#dzPreviews .dz-image').each(function() {
+        $('.dz-image').each(function() {
 
             // find the file unique data-id
             const fileId = $(this).data('id');
@@ -217,7 +184,7 @@ $('#dzPreviews').sortable({
 
         myDropzone.files = sortedFiles;
     }
-});
+}).disableSelection();
 
 /**
  * ------------------------------------------------------------------------------------
@@ -232,7 +199,7 @@ myDropzone.on('successmultiple', function(response) {
     const successMessage = $('#dzSuccessMessage').html();
 
     // hide additional areas & dropzone 
-    $('.dz-additional-area').parent().remove();
+    $('.dz-additional-area').remove();
     $('#dzImageUploadForm').fadeOut(300);
 
     // show success message
