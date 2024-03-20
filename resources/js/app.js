@@ -191,7 +191,7 @@ $(document).on('click', '.dz-remove-button', function(event) {
                 $('.dz-additional-area').parent().remove();
 
             } else {
-                alert('lala')
+
                 // update the additional areas in case the count needs adjusting
                 updateAdditionalAreas(); 
             }
