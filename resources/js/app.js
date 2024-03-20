@@ -101,22 +101,6 @@ myDropzone.on('sending', function(file, xhr, formData) {
 });
 
 /**
- * On successful upload event
- */
-myDropzone.on('successmultiple', function(response) {
-    const successMessage = $('#dzSuccessMessage').html();
-
-    // hide additional areas & dropzone 
-    $('.dz-additional-area').parent().remove();
-    $('#dzImageUploadForm').fadeOut(300);
-
-    // show success message
-    setTimeout(function() {
-        $(successMessage).insertBefore('#dzImageUploadForm').fadeIn();
-    }, 300);
-});
-
-/**
  * Adjust additional upload areas
  */
 function updateAdditionalAreas() {
@@ -169,11 +153,11 @@ $(document).on('click', '.dz-remove-button', function(event) {
         myDropzone.removeFile(fileToRemove);
 
         // use setTimeout to delay the execution of the layout adjustment
-        // this gives Dropzone enough time to update its internal state
         setTimeout(() => {
+
+            // check if the removed file was the cover image
             if (wasCoverImage && myDropzone.files.length > 0) {
 
-                // the removed file was the cover image and there are still other files left
                 setTimeout(() => {
                     const previews = $(myDropzone.previewsContainer).children(':not(.dz-additional-area)');
                     previews.removeClass('col-12 col-md-6').addClass('col-md-6');
@@ -198,16 +182,16 @@ $(document).on('click', '.dz-remove-button', function(event) {
                     // Update the additional areas in case the count needs adjusting
                     updateAdditionalAreas(); 
                 }, 0);
-
+            
+            // if there are no more files, show the upload prompt again
             } else if (myDropzone.files.length === 0) {
 
-                // if there are no more files, possibly show the upload prompt again
                 placeHolder.show();
                 $('#dzDropzone').removeClass('border-0');
                 $('.dz-additional-area').parent().remove();
 
             } else {
-
+                alert('lala')
                 // update the additional areas in case the count needs adjusting
                 updateAdditionalAreas(); 
             }
@@ -295,6 +279,22 @@ $('#dzPreviews').sortable({
  * FINAL STEPS
  * ------------------------------------------------------------------------------------
  */
+
+/**
+ * On successful upload
+ */
+myDropzone.on('successmultiple', function(response) {
+    const successMessage = $('#dzSuccessMessage').html();
+
+    // hide additional areas & dropzone 
+    $('.dz-additional-area').parent().remove();
+    $('#dzImageUploadForm').fadeOut(300);
+
+    // show success message
+    setTimeout(function() {
+        $(successMessage).insertBefore('#dzImageUploadForm').fadeIn();
+    }, 300);
+});
 
 /**
  * Submit images upload
