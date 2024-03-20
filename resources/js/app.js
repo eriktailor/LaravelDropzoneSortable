@@ -234,6 +234,7 @@ $('#dzPreviews').sortable({
     containment: 'parent',
     distance: 20,
     tolerance: 'pointer',
+    placeholder: 'sortable-placeholder',
     update: function() {
 
         // after sorting, adjust the layout and move the cover badge to the first item

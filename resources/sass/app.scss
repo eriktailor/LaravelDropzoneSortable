@@ -36,11 +36,16 @@ h1 {
     &.dz-drag-hover {
         background: $primary;
         .dz-message {
-            color: #FFF;
             display: flex !important;
         }
         .dz-previews-container {
             opacity: 0.1;
+        }
+    }
+    &:hover {
+        .dz-message {
+            border-style: solid;
+            cursor: pointer;
         }
     }
 }
@@ -83,4 +88,14 @@ h1 {
     &:hover {
         background: rgba(0,0,0,0.75)
     }
+}
+
+// Sortable styles ------------------------------------------------
+
+.sortable-placeholder {
+    width: 100%;
+    max-width: 310px;
+    height: 200px;
+    background: #C7DBFF;
+    @extend .rounded-3;
 }
