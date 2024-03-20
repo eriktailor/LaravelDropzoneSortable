@@ -101,6 +101,22 @@ myDropzone.on('sending', function(file, xhr, formData) {
 });
 
 /**
+ * On successful upload event
+ */
+myDropzone.on('successmultiple', function(response) {
+    const successMessage = $('#dzSuccessMessage').html();
+
+    // hide additional areas & dropzone 
+    $('.dz-additional-area').parent().remove();
+    $('#dzImageUploadForm').fadeOut(300);
+
+    // show success message
+    setTimeout(function() {
+        $(successMessage).insertBefore('#dzImageUploadForm').fadeIn();
+    }, 300);
+});
+
+/**
  * Adjust additional upload areas
  */
 function updateAdditionalAreas() {
@@ -109,7 +125,7 @@ function updateAdditionalAreas() {
     let additionalAreas = 0;
 
     // remove all additional areas first
-    $(myDropzone.previewsContainer).find('.dz-additional-area').parent().remove();
+    $('.dz-additional-area').parent().remove();
 
     additionalAreas = 5 - filesCount;
 
@@ -268,7 +284,7 @@ $('#dzPreviews').sortable({
                 sortedFiles.push(file);
             }
         });
-        
+
         myDropzone.files = sortedFiles;
     }
 });
@@ -286,12 +302,11 @@ $('#dzSubmitButton').on('click', function(event) {
     event.preventDefault();
 
     // show error messages if not have enough images
-  /*   if (myDropzone.files.length === 0) {
+    if (myDropzone.files.length === 0) {
         errorMessage.show().text('You have to upload at least 1 image.');
     } else {
 
         // process the queue
         myDropzone.processQueue();
-    } */
-    myDropzone.processQueue();
+    }
 });
