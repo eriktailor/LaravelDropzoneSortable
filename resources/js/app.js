@@ -114,59 +114,26 @@ $(document).on('click', '.dz-remove-button', function(event) {
     event.preventDefault();
     event.stopPropagation();
 
+    // find the corresponding dropzone object
     const filePreview = $(this).closest('.dz-image');
-    const fileId = filePreview.data('file-id');
-
-    // find the corresponding Dropzone object
+    const tempId = filePreview.data('id');
     const fileToRemove = myDropzone.files.find(function(file) {
-        return file.uniqueId === fileId;
+        return file.tempId === tempId;
     });
 
     if (fileToRemove) {
 
-        // Capture the index of the file to be removed before actually removing it
-        let wasCoverImage = filePreview.index() === 0;
-
         // remove the file
         myDropzone.removeFile(fileToRemove);
 
-        // use setTimeout to delay the execution of the layout adjustment
+        // delay the execution of the layout adjustment
         setTimeout(() => {
 
-            // check if the removed file was the cover image
-            if (wasCoverImage && myDropzone.files.length > 0) {
-
-                setTimeout(() => {
-                    const previews = $(myDropzone.previewsContainer).children(':not(.dz-additional-area)');
-                    previews.removeClass('col-12 col-md-6').addClass('col-md-6');
-
-                    if (previews.length > 0) {
-
-                        // make the first preview the new cover
-                        previews.eq(0).removeClass('col-md-6').addClass('col-12');
-                        $('#dzDropzone').addClass('border-0');
-
-                        // ensure the cover badge is correctly placed
-                        $('.dz-cover-badge').remove();
-                        previews.eq(0).find('.dz-image').append($('#dzBadgeTemplate').html());
-
-                    } else {
-
-                        // if there are no more previews, show the message again
-                        placeHolder.show();
-                        $('#dzDropzone').removeClass('border-0');
-                    }
-
-                    // Update the additional areas in case the count needs adjusting
-                    updateAdditionalAreas(); 
-                }, 0);
-            
             // if there are no more files, show the upload prompt again
-            } else if (myDropzone.files.length === 0) {
+            if (myDropzone.files.length === 0) {
 
                 placeHolder.show();
-                $('#dzDropzone').removeClass('border-0');
-                $('.dz-additional-area').parent().remove();
+                $('.dz-additional-area').remove();
 
             } else { 
 
