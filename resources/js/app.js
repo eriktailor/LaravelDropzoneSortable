@@ -4,13 +4,9 @@
  * ------------------------------------------------------------------------------------
  */
 
-// import jQuery
+// imports
 import './bootstrap.js';
-
-// import jQuery UI
 import 'jquery-ui/dist/jquery-ui';
-
-// import Dropzone
 import { Dropzone } from 'dropzone';
 
 // ajax csrf setup
@@ -19,9 +15,6 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-
-// prevent dropzone autodiscover
-Dropzone.autoDiscover = false;
 
 // set global variables
 const errorMessage = $('#dzErrorMessage');
@@ -32,6 +25,8 @@ const placeHolder = $('#dzPlaceholder');
  * DROPZONE SETUP
  * ------------------------------------------------------------------------------------
  */
+
+Dropzone.autoDiscover = false;
 
 /**
  * Dropzone initial setup
@@ -44,7 +39,7 @@ const myDropzone = new Dropzone('#dzDropzone', {
     maxFiles: 5,
     thumbnailWidth: 800,
     thumbnailHeight: 500,
-    previewTemplate: $('#dzTemplate').html(),
+    previewTemplate: $('#dzImageTemplate').html(),
     previewsContainer: '#dzPreviews',
     acceptedFiles: 'image/*',
 });
@@ -53,31 +48,17 @@ const myDropzone = new Dropzone('#dzDropzone', {
  * If files dragged into dropzone
  */
 myDropzone.on('addedfile', function(file) {
+
+    // hide placeholder and error messages
     errorMessage.hide();
     placeHolder.hide();
     
-    // Generate a temporary identifier for each file
+    // Generate a temporary identifier for each file (data-id)
     file.tempId = 'temp_' + file.name + '_' + file.size + '_' + file.lastModified;
     file.previewElement.setAttribute('data-id', file.tempId);
-    
-    setTimeout(() => {
 
-        // Update layout for existing previews
-        const previews = $(myDropzone.previewsContainer).children(':not(.dz-additional-area)');
-        previews.addClass('col-md-6');
-        if (myDropzone.files.length >= 1) {
-            previews.eq(0).removeClass('col-md-6').addClass('col-12');
-            $('#dzDropzone').addClass('border-0');
-        }
-
-        // Adds the cover badge to first image
-        const coverBadge = $('#dzBadgeTemplate').html();
-        if (previews.eq(0).find('.dz-cover-badge').length === 0) {
-            previews.eq(0).find('.dz-image').append(coverBadge);
-        }
-        
-        updateAdditionalAreas(); 
-    }, 0);
+    // add additional upload areas
+    updateAdditionalAreas();
 });
 
 /**
@@ -86,15 +67,10 @@ myDropzone.on('addedfile', function(file) {
 myDropzone.on('error', function(file, response) {
     errorMessage.show().text(response);
     this.removeFile(file);
-
-    // if there are no more files in Dropzone, show the placeholder
-    if (myDropzone.files.length < 1) {
-        placeHolder.show();
-    }
 });
 
 /**
- * On sending event (attach csrf token)
+ * On uploading event (attach csrf token)
  */
 myDropzone.on('sending', function(file, xhr, formData) {
     formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
@@ -109,10 +85,12 @@ function updateAdditionalAreas() {
     let additionalAreas = 0;
 
     // remove all additional areas first
-    $('.dz-additional-area').parent().remove();
+    $('.dz-additional-area').remove();
 
+    // count how many additional areas needed
     additionalAreas = 5 - filesCount;
 
+    // render the needed additional areas
     for (let i = 0; i < additionalAreas; i++) {
         $(myDropzone.previewsContainer).append(additionalTemplate);
     }
@@ -136,7 +114,7 @@ $(document).on('click', '.dz-remove-button', function(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    const filePreview = $(this).closest('.dz-image-preview');
+    const filePreview = $(this).closest('.dz-image');
     const fileId = filePreview.data('file-id');
 
     // find the corresponding Dropzone object
@@ -190,7 +168,7 @@ $(document).on('click', '.dz-remove-button', function(event) {
                 $('#dzDropzone').removeClass('border-0');
                 $('.dz-additional-area').parent().remove();
 
-            } else {
+            } else { 
 
                 // update the additional areas in case the count needs adjusting
                 updateAdditionalAreas(); 
@@ -212,7 +190,7 @@ $(document).on('click', '.dz-remove-button', function(event) {
  * Sortable initial setup
  */
 $('#dzPreviews').sortable({
-    items: '.dz-image-preview',
+    items: '.dz-image',
     cursor: 'grab',
     opacity: 0.5,
     containment: 'parent',
@@ -222,7 +200,7 @@ $('#dzPreviews').sortable({
     update: function() {
 
         // after sorting, adjust the layout and move the cover badge to the first item
-        $('#dzPreviews .dz-image-preview').each(function(index) {
+        $('#dzPreviews .dz-image').each(function(index) {
             if (index === 0) {
 
                 // ensure the first item is cover image
@@ -258,7 +236,7 @@ $('#dzPreviews').sortable({
         const files = myDropzone.files;
         const sortedFiles = [];
 
-        $('#dzPreviews .dz-image-preview').each(function() {
+        $('#dzPreviews .dz-image').each(function() {
 
             // find the file unique data-id
             const fileId = $(this).data('id');

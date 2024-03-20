@@ -33,6 +33,7 @@ h1 {
 .main-drag-area {
     min-height: 350px;
     background: transparent;
+    border: 0;
     &.dz-drag-hover {
         background: $primary;
         .dz-message {
@@ -55,22 +56,32 @@ h1 {
     border: 1px dashed #8B8F93;
     &:hover {
         border-style: solid;
+        cursor: pointer;
     }
 }
 
 .dz-previews-container {
-    transition: all 0.2s;
-    margin-top: 0 !important;
-    .dz-image-preview {
+    transition: all 0.25s;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: auto;
+    gap: 22px; 
+    > div:first-child {
+        grid-column: 1 / -1;
+        height: 350px !important;
         position: relative;
-        .dz-image {
-            height: 200px;
-        }
-        &:first-child {
-            margin-top: 0 !important;
-            .dz-image {
-                height: 350px;
-            }
+        &:after {
+            content: 'Cover';
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 10;
+            color: #FFF;
+            padding: 8px 10px;
+            border-radius: 6px;
+            margin: 8px;
+            line-height: 0.9;
         }
     }
 }
