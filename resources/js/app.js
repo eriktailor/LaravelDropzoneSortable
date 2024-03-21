@@ -118,7 +118,7 @@ $(document).on('click', '.dz-remove-button', function(event) {
     event.stopPropagation();
 
     // find the corresponding dropzone object
-    const filePreview = $(this).closest('.dz-image');
+    const filePreview = $(this).closest('.dz-image-preview');
     const tempId = filePreview.data('id');
     const fileToRemove = myDropzone.files.find(function(file) {
         return file.tempId === tempId;
@@ -161,14 +161,18 @@ $(document).on('click', '.dz-remove-button', function(event) {
  */
 $('#dzPreviews').sortable({
     items: '.dz-image-preview',
+    cancel: '.dz-image-preview:first-child',
     placeholder: 'sortable-placeholder',
     tolerance: 'pointer',
     start: function(event, ui) {
-        // Initial placeholder setup to match the dragged item's size
+
+        // nitial placeholder setup to match the dragged item's size
         ui.placeholder.width(ui.item.width()).height(ui.item.height());
     },
     change: function(event, ui) {
         var isPlaceholderFirst = ui.placeholder.index() === 0;
+
+        // show the first cover image's placeholder if dragged into it
         if (isPlaceholderFirst) {
             ui.placeholder.addClass('cover-placeholder');
         } else {
@@ -195,6 +199,14 @@ $('#dzPreviews').sortable({
 
         myDropzone.files = sortedFiles;
     }
+});
+
+/**
+ * Prevent the first cover image from being dragged
+ */
+$(document).on('mousedown', '.dz-image-preview:first-child', function(event) {
+    event.preventDefault();
+    return false;
 });
 
 /**
