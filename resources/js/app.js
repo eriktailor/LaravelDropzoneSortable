@@ -280,4 +280,4 @@ function getUploadedImages() {
             console.error("Error: " + status + " " + error);
         }
     });
-}    
+}     
