@@ -10,6 +10,7 @@
 </head>
 <body>
 
+    <!-- Upload section -->
     <section class="py-5">
         <div class="container py-5">
             <header class="mb-5">
@@ -37,6 +38,7 @@
         </div>
     </section>
 
+    <!-- Display section -->
     <section class="bg-white display-none py-5" id="uploadedImagesSection">
         <div class="container py-5">
             <header class="mb-5">
