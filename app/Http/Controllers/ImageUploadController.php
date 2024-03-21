@@ -7,12 +7,18 @@ use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
 
 class ImageUploadController extends Controller
-{
+{   
+    /**
+     * Display the homepage
+     */
     public function index()
     {
         return view('welcome');
     }
 
+    /**
+     * Upload images (with Dropzone)
+     */
     public function upload(Request $request)
     {
         $images = $request->file('file');
@@ -28,6 +34,9 @@ class ImageUploadController extends Controller
         return response()->json(['success' => true]); 
     }
 
+    /**
+     * Display uploaded images
+     */
     public function preview()
     {
         $images = Image::orderBy('order', 'asc')->get();
