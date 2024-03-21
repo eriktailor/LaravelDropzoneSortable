@@ -1,3 +1,8 @@
+// Variables --------------------------------------------------
+
+$coverImageHeight: 350px;
+$additionalImageHeight: 220px;
+
 // Page styles ------------------------------------------------
 
 @import 'bootstrap/scss/bootstrap';
@@ -31,7 +36,7 @@ h1 {
 }
 
 .main-drag-area {
-    min-height: 350px;
+    min-height: $coverImageHeight;
     background: transparent;
     border: 0;
     &.dz-drag-hover {
@@ -52,7 +57,7 @@ h1 {
 }
 
 .dz-additional-area {
-    height: 200px;
+    height: $additionalImageHeight;
     border: 1px dashed #8B8F93;
     &:hover {
         border-style: solid;
@@ -85,9 +90,11 @@ h1 {
     grid-auto-rows: auto;
     gap: 22px; 
     .dz-image-preview {
+        height: $additionalImageHeight;
+        border: 1px solid transparent;
         &:first-child {
             grid-column: 1 / -1;
-            height: 350px !important;
+            height: $coverImageHeight;
             position: relative;
             &:after {
                 content: 'Cover';
@@ -110,4 +117,9 @@ h1 {
     background: #FFF;
     border: 1px dashed #8B8F93;
     @extend .rounded-3;
+    &.cover-placeholder {
+        height: $coverImageHeight !important;
+        width: 100% !important;
+        grid-column: 1 / -1 !important;
+    }
 }

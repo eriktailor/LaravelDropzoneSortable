@@ -67,6 +67,9 @@ myDropzone.on('addedfile', function(file) {
 myDropzone.on('error', function(file, response) {
     errorMessage.show().text(response);
     this.removeFile(file);
+
+    // add additional upload areas
+    updateAdditionalAreas();
 });
 
 /**
@@ -160,6 +163,18 @@ $('#dzPreviews').sortable({
     items: '.dz-image-preview',
     placeholder: 'sortable-placeholder',
     tolerance: 'pointer',
+    start: function(event, ui) {
+        // Initial placeholder setup to match the dragged item's size
+        ui.placeholder.width(ui.item.width()).height(ui.item.height());
+    },
+    change: function(event, ui) {
+        var isPlaceholderFirst = ui.placeholder.index() === 0;
+        if (isPlaceholderFirst) {
+            ui.placeholder.addClass('cover-placeholder');
+        } else {
+            ui.placeholder.removeClass('cover-placeholder');
+        }
+    },
     stop: function() {
 
         // update the files array based on new order
