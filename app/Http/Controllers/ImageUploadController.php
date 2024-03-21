@@ -8,17 +8,18 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageUploadController extends Controller
 {
-    public function showImages()
+    public function index()
     {
         $images = Image::orderBy('order', 'asc')->get();
-        return view('show-images', compact('images'));
+        return view('welcome', compact('images'));
     }
 
     public function upload(Request $request)
     {
         $images = $request->file('file');
+
         foreach ($images as $index => $image) {
-            $path = $image->store('public/images', 'local');
+            $path = $image->store('images', 'public');
             Image::create([
                 'path' => $path,
                 'order' => $index + 1,

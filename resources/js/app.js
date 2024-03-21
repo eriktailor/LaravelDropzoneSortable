@@ -227,20 +227,15 @@ $(document).on('mousedown', '.dz-image-preview:first-child', function(event) {
 myDropzone.on('successmultiple', function(response) {
     const successMessage = $('#dzSuccessMessage').html();
 
-    // remove all files from dropzone
+    // remove files from dropzone & hide form
     myDropzone.removeAllFiles();
-
-    // set back dropzone to initial state
-    setTimeout(function() {   
-        placeHolder.show();
-        $('.dz-additional-area').remove();
-    }, 500);
+    $('#dzImageUploadForm').fadeOut(500)
 
     // hide loading div & show success message
     setTimeout(function() {
         $('.dz-loading-div').fadeOut();
         $(successMessage).insertBefore('#dzImageUploadForm').slideDown();
-    }, 800);
+    }, 500);
 });
 
 /**
