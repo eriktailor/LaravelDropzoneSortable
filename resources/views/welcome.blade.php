@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Laravel Dropzone Sortable</title>
-
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +15,7 @@
         <!-- Page Header -->
         <header class="mb-5">
             <h1 class="display-5 fw-bold mb-4">Laravel Dropzone image upload with Sortable</h1>
-            <p class="lead text-muted mb-0">Upload minimum 1, and maximum 5 images by dragging into the area below, then you can change their display order by dragging.</p>
+            <p class="lead text-muted mb-0">Upload at least one, but maximum five images, by drag and drop them into the area below, then you can change their display order by dragging.</p>
         </header>
 
         <!-- Dropzone Form -->
@@ -35,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            <div class="invalid-feedback mb-3" id="dzErrorMessage"></div>
+            <div class="invalid-feedback fw-bold mb-3" id="dzErrorMessage"></div>
             <button class="btn btn-lg btn-primary fs-6 py-3 px-4 mt-2" id="dzSubmitButton">Upload Images</button>
         </form>
 
