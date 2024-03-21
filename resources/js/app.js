@@ -73,9 +73,15 @@ myDropzone.on('error', function(file, response) {
 });
 
 /**
- * On uploading event (attach csrf token)
+ * On uploading event
  */
 myDropzone.on('sending', function(file, xhr, formData) {
+    const loadingDiv = $('#dzLoadingOverlay').html();
+
+    // show loading div
+    $('#dzDropzone').append(loadingDiv);
+
+    // attach csrf token
     formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 });
 
