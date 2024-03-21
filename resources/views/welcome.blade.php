@@ -43,11 +43,13 @@
 
     <!-- Templates -->
     <script id="dzImageTemplate" type="text/template">
-        <div class="dz-image position-relative rounded-3 overflow-hidden h-100" data-id="">
-            <img class="w-100 h-100 object-fit-cover" data-dz-thumbnail>
-            <svg class="dz-remove-button m-2" type="button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" />
-            </svg>
+        <div class="dz-image-preview" data-id="">
+            <div class="dz-image position-relative rounded-3 overflow-hidden h-100" >
+                <img class="w-100 h-100 object-fit-cover" data-dz-thumbnail>
+                <svg class="dz-remove-button m-2" type="button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" />
+                </svg>
+            </div>
         </div>
     </script>    
     <script id="dzAdditionalTemplate" type="text/template">

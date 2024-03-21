@@ -157,20 +157,16 @@ $(document).on('click', '.dz-remove-button', function(event) {
  * Sortable initial setup
  */
 $('#dzPreviews').sortable({
-    items: '.dz-image',
-    cursor: 'grab',
-    opacity: 0.5,
-    containment: 'parent',
-    distance: 20,
-    tolerance: 'pointer',
+    items: '.dz-image-preview',
     placeholder: 'sortable-placeholder',
+    tolerance: 'pointer',
     stop: function() {
 
         // update the files array based on new order
         const files = myDropzone.files;
         const sortedFiles = [];
 
-        $('.dz-image').each(function() {
+        $('.dz-image-preview').each(function() {
 
             // find the file unique data-id
             const fileId = $(this).data('id');
@@ -184,7 +180,7 @@ $('#dzPreviews').sortable({
 
         myDropzone.files = sortedFiles;
     }
-}).disableSelection();
+});
 
 /**
  * ------------------------------------------------------------------------------------
