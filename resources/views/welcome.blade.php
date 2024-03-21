@@ -46,7 +46,7 @@
         <div class="dz-image-preview" data-id="">
             <div class="dz-image position-relative rounded-3 overflow-hidden h-100" >
                 <img class="w-100 h-100 object-fit-cover" data-dz-thumbnail>
-                <svg class="dz-remove-button m-2 z-2" type="button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="dz-remove-button m-2" type="button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" />
                 </svg>
             </div>
@@ -60,9 +60,11 @@
         </div>
     </script>
     <script id="dzLoadingOverlay" type="text/template">
-        <div class="position-absolute w-100 h-100 start-0 top-0 d-flex align-items-center justify-content-center bg-white rounded-3 z-3">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
+        <div class="dz-loading-div">
+            <div class="position-absolute w-100 h-100 start-0 top-0 d-flex align-items-center justify-content-center bg-white rounded-3 z-3">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
         </div>
     </script>

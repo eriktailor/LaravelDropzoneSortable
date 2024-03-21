@@ -73,9 +73,9 @@ myDropzone.on('error', function(file, response) {
 });
 
 /**
- * On uploading event
+ * On sending images to request
  */
-myDropzone.on('sending', function(file, xhr, formData) {
+myDropzone.on('sendingmultiple', function(file, xhr, formData) {
     const loadingDiv = $('#dzLoadingOverlay').html();
 
     // show loading div
@@ -227,14 +227,20 @@ $(document).on('mousedown', '.dz-image-preview:first-child', function(event) {
 myDropzone.on('successmultiple', function(response) {
     const successMessage = $('#dzSuccessMessage').html();
 
-    // hide additional areas & dropzone 
-    $('.dz-additional-area').remove();
-    $('#dzImageUploadForm').fadeOut(300);
+    // remove all files from dropzone
+    myDropzone.removeAllFiles();
 
-    // show success message
+    // set back dropzone to initial state
+    setTimeout(function() {   
+        placeHolder.show();
+        $('.dz-additional-area').remove();
+    }, 500);
+
+    // hide loading div & show success message
     setTimeout(function() {
-        $(successMessage).insertBefore('#dzImageUploadForm').fadeIn();
-    }, 300);
+        $('.dz-loading-div').fadeOut();
+        $(successMessage).insertBefore('#dzImageUploadForm').slideDown();
+    }, 800);
 });
 
 /**
