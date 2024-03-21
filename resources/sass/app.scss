@@ -25,6 +25,10 @@ h1 {
 
 .preview-img {
     height: 300px;
+    width: 100%;
+    margin-bottom: 30px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
 // Dropzone styles ------------------------------------------------

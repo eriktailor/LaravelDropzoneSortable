@@ -273,7 +273,7 @@ function getUploadedImages() {
         dataType: 'json',
         success: function(data) {
             $.each(data, function(index, image) {
-                $('#previewsContainer').append('<img class="preview-img object-fit-cover rounded-3 w-100 mb-4" src="/storage/'+image.path+'">');
+                $('#previewsContainer').append('<img class="preview-img" src="/storage/'+image.path+'">');
             });
         },
         error: function(xhr, status, error) {

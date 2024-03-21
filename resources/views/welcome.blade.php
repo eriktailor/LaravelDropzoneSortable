@@ -41,7 +41,7 @@
         <div class="container py-5">
             <header class="mb-5">
                 <h1 class="display-5 fw-bold mb-4">Uploaded images in order</h1>
-                <p class="lead text-muted mb-0">Below you can see the previously uploaded images, in your manually sorted display order.</p>
+                <p class="lead text-muted mb-0">Below you can see the previously uploaded images, in your manually sorted ascending display order.</p>
             </header>
             <div id="previewsContainer"></div>
         </div>
