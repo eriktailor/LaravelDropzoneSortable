@@ -1,8 +1,10 @@
 <?php
-use App\Http\Controllers\ImageUploadController;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageUploadController;
 
-Route::get('/', [ImageUploadController::class, 'index']);
-Route::post('/upload', [ImageUploadController::class, 'upload']);
-
+Route::controller(ImageUploadController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/previews', 'preview');
+    Route::post('/upload', 'upload');
+});

@@ -10,8 +10,7 @@ class ImageUploadController extends Controller
 {
     public function index()
     {
-        $images = Image::orderBy('order', 'asc')->get();
-        return view('welcome', compact('images'));
+        return view('welcome');
     }
 
     public function upload(Request $request)
@@ -27,5 +26,12 @@ class ImageUploadController extends Controller
         }
 
         return response()->json(['success' => true]); 
+    }
+
+    public function preview()
+    {
+        $images = Image::orderBy('order', 'asc')->get();
+
+        return response()->json($images); 
     }
 }

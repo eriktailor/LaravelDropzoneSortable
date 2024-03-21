@@ -43,9 +43,7 @@
                 <h1 class="display-5 fw-bold mb-4">Uploaded images in order</h1>
                 <p class="lead text-muted mb-0">Below you can see the previously uploaded images, in your manually sorted display order.</p>
             </header>
-            @foreach ($images as $image)
-                <img class="preview-img object-fit-cover rounded-3 w-100 mb-4" src="/storage/{{ $image->path }}" alt="Order: {{ $image->order }}">
-            @endforeach
+            <div id="previewsContainer"></div>
         </div>
     </section>
 

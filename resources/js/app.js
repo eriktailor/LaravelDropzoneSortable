@@ -217,7 +217,7 @@ $(document).on('mousedown', '.dz-image-preview:first-child', function(event) {
 
 /**
  * ------------------------------------------------------------------------------------
- * FINAL STEPS
+ * SUBMIT IMAGES
  * ------------------------------------------------------------------------------------
  */
 
@@ -236,6 +236,12 @@ myDropzone.on('successmultiple', function(response) {
         $('.dz-loading-div').fadeOut();
         $(successMessage).insertBefore('#dzImageUploadForm').slideDown();
     }, 500);
+
+    // show display uploaded images section
+    setTimeout(function() {
+        getUploadedImages();
+        $('#uploadedImagesSection').slideDown();
+    }, 600);
 });
 
 /**
@@ -253,3 +259,25 @@ $('#dzSubmitButton').on('click', function(event) {
         myDropzone.processQueue();
     }
 });
+
+/**
+ * ------------------------------------------------------------------------------------
+ * DISPLAY PREVIEWS
+ * ------------------------------------------------------------------------------------
+ */
+
+function getUploadedImages() {
+    $.ajax({
+        url: '/previews',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            $.each(data, function(index, image) {
+                $('#previewsContainer').append('<img class="preview-img object-fit-cover rounded-3 w-100 mb-4" src="/storage/'+image.path+'">');
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("Error: " + status + " " + error);
+        }
+    });
+}    
